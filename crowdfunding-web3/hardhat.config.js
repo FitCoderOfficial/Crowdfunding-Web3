@@ -2,6 +2,15 @@
 module.exports = {
   solidity: {
     version: '0.8.9',
+    defaultNetwork: 'goerli',
+    networks:{
+      hardhat:{      
+      },
+      goerli:{
+        url: 'https://rpc.ankr.com/eth_goerli',     //테스트 비트코인
+        account: [`0x${process.env.PRIVATE_KEY}`]   //내 지갑 계정
+      }
+    },
     settings: {
       optimizer: {
         enabled: true,

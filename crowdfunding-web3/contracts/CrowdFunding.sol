@@ -23,6 +23,10 @@ contract CrowdFunding {
 
     uint256 public numberOfCampaigns = 0; // 초기 캠페인 수
 
+
+
+
+
     function createCampaign(address _owner, string memory _title, string memory _description, 
                             uint256 _target, uint256 _deadline, string memory _image) public returns (uint256) {      //캠페인 매개변수 설정, 매개변수는 앞에 _를 붙임
                                 Campaign storage campaign = campaigns[numberOfCampaigns];                            //캠페인 배열에 초기 설정값 부여
@@ -42,12 +46,13 @@ contract CrowdFunding {
                                 return numberOfCampaigns - 1;                                                       
                             }
 
-    function donateToCampaign(uint256 _id) public payable {
-        uint256 amount = msg.value;                    // 메세지값 
 
-        Campaign storage campaign = campaigns[_id];    //위의 매핑된 캠페인에 아이디 매개변수값 부여
-        campaign.donators.push(msg.sender);            //기부자
-        campaign.donations.push(amount);              //돈
+    function donateToCampaign(uint256 _id) public payable {
+        uint256 amount = msg.value;                    
+
+        Campaign storage campaign = campaigns[_id];    // 위의 매핑된 캠페인에 아이디 매개변수 값 부여
+        campaign.donators.push(msg.sender);            // 기부자 정보
+        campaign.donations.push(amount);              // 기부금 정보
 
         (bool send, ) = payable(campaign.owner).call{value: amount}("");
 
@@ -56,7 +61,23 @@ contract CrowdFunding {
         }
     }
 
-    function getDonators() {}
 
-    function getCampaigns() {}
+    function getDonators(uint256 _id) view public returns (address[] memory, uint256[] memory) {   // 캠페인의 id를 받아서 기부자와 기부금의 배열을 반환함
+        return (campaigns[_id].donators, campaigns[_id].donations);
+    }
+
+
+
+    function getCampaigns() public view returns (Campaign[] memory) {         // 모든 캠페인을 반환함
+        Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);    //
+
+        for(uint i = 0; i < numberOfCampaigns; i++) {
+            Campaign storage item = campaigns[i];           //캠페인 저장소에서 모든 캠페인을 불러옴
+
+            allCampaigns[i] = item;
+        }
+
+        return allCampaigns;
+
+    }
 }
