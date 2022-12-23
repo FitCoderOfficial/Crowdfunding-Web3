@@ -80,7 +80,7 @@ const Navbar = () => {
             <CustomButton 
               btnType="button"
               title={address ? '프로젝트 만들기' : '지갑 연결하기'}
-              styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
+              style={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
               handleClick={() => {
                 if(address) navigate('create-campaign')
                 else connect();
