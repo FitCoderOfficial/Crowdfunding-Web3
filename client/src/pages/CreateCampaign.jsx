@@ -2,7 +2,8 @@ import React,{ useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { ethers } from 'ethers';
 
-import { money } from '../assets';
+import { useStateContext } from '../context';
+import { createCampaign, money } from '../assets';
 import { CustomButton, FormField } from '../components';
 import { checkIfImage } from '../utils';
 
@@ -11,17 +12,26 @@ import { checkIfImage } from '../utils';
 const CreateCampaign = () => {
 
   const navigate = useNavigate();
-  const [isLoading, setisLoading] = useState(false);
-  const [form, setform] = useState({
+  const [isLoading, setisLoading ] = useState(false);
+  const { CreateCampaign } = useStateContext();
+  const [form, setForm] = useState({
     name: '',
     title: '',
     description: '',
-    target: '',
+    target: '', 
     deadline: '',
-    image: '',
+    image: ''
   });
 
-  const handleSubmit = () => {
+  const handleFormFieldChange = (fieldName, e) => {
+    setForm({ ...form, [fieldName]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+    console.log(form);
 
   }
 
@@ -39,14 +49,14 @@ const CreateCampaign = () => {
           placeholder="홍길동" 
           inputType="text"
           value={form.name}
-          handelChange={() => {}}
-          /> 
+          handleChange={(e) => handleFormFieldChange('name', e)}
+          />
           <FormField
           labelName="프로젝트 제목"
           placeholder="프로젝트 이름" 
           inputType="text"
           value={form.title}
-          handelChange={() => {}}
+          handleChange={(e) => handleFormFieldChange('title', e)}
            />  
 
         </div>
@@ -57,7 +67,7 @@ const CreateCampaign = () => {
           isTextArea
           inputType="text"
           value={form.description}
-          handelChange={() => {}}
+          handleChange={(e) => handleFormFieldChange('description', e)}
            /> 
 
 
@@ -72,22 +82,23 @@ const CreateCampaign = () => {
             placeholder="ETH 0.50" 
             inputType="text"
             value={form.target}
-            handelChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('target', e)}
             />  
             <FormField
             labelName="펀딩 기간"
             placeholder="펀딩 기간" 
             inputType="date"
             value={form.deadline}
-            handelChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('deadline', e)}
             /> 
            </div>
+
            <FormField
           labelName="프로젝트 이미지"
           placeholder="이미지 url를 올려주세요" 
           inputType="url"
-          value={form.target}
-          handelChange={() => {}}
+          value={form.image}
+          handleChange={(e) => handleFormFieldChange('image', e)}
            />  
 
           <div className="flex justify-center items-center mt-[40px]">

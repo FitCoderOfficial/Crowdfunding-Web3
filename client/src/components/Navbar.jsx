@@ -27,9 +27,9 @@ const Navbar = () => {
             btntype='button'
             title={address ? "프로젝트 만들기" : "지갑 연결하기" } 
             style={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'} 
-            handleClink={() => {
+            handleClick={() => {
               if(address) navigate('create-campaign')
-              else 'connect()'
+              else connect()
             }} 
             />
             <Link to='/profile'>
