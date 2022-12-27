@@ -89,7 +89,7 @@ const CreateCampaign = () => {
             <FormField
             labelName="목표 금액"
             placeholder="ETH 0.50" 
-            inputType="text"
+            inputType="number"
             value={form.target}
             handleChange={(e) => handleFormFieldChange('target', e)}
             />  

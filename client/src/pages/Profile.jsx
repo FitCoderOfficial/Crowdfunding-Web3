@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <DisplayCampaigns
-      title="현재 진행중인 프로젝트"
+      title="내가 진행중인 프로젝트"
       isLoading={isLoading}
       campaigns={campaigns}
     />

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { tagType, thirdweb } from '../assets';
-import { daysLeft } from '../utils';
+import { calculateBarPercentage, daysLeft } from '../utils';
 
 const FundCard = ({ owner, title, description, target, deadline, amountCollected, image, handleClick }) => {
   const remainingDays = daysLeft(deadline);
@@ -24,9 +24,10 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
         <div className="flex flex-col">
           <h4 className="font-notosans font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{amountCollected}</h4>
           <p className="mt-[3px] font-notosans font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">목표금액 {target}</p>
+          
         </div>
         <div className="flex flex-col">
-          <h4 className="font-notosans font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{remainingDays}</h4>
+          <h4 className="font-notosans font-semibold text-[14px] text-[#b9643d] leading-[22px] ">{calculateBarPercentage(target, amountCollected)}% </h4>
           <p className="mt-[3px] font-notosans font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">{remainingDays}일 남음</p>
         </div>
       </div>
