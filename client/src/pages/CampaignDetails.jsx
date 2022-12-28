@@ -116,7 +116,7 @@ const CampaignDetails = () => {
 
               <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
                 <h4 className="font-notosans font-semibold text-[15px] leading-[22px] text-white">후원 금액을 신중하게 결정해주세요</h4>
-                <p className="mt-[20px] font-notosans font-normal leading-[22px] text-[#808191]"> 펀딩 종료일 후에는 프로젝트 특성상 '단순 변심에 의한 후원금 환불이 불가능' 합니다.</p>
+                <p className="mt-[20px] font-notosans font-normal leading-[22px] text-[#808191]"> 펀딩 종료일 후에는 프로젝트 특성상 <br /> '단순 변심에 의한 후원금 환불이 불가능' 합니다</p>
               </div>
 
               <CustomButton 
