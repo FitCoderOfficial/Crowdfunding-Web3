@@ -27,7 +27,7 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
           
         </div>
         <div className="flex flex-col">
-          <h4 className="font-notosans font-semibold text-[14px] text-[#b9643d] leading-[22px] ">{calculateBarPercentage(target, amountCollected)}% </h4>
+          <h4 className="font-notosans font-semibold text-[14px] text-[#b9643d] leading-[22px] ">{calculateBarPercentage(target, amountCollected)}% 달성</h4>
           <p className="mt-[3px] font-notosans font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">{remainingDays}일 남음</p>
         </div>
       </div>
